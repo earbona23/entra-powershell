@@ -19,7 +19,7 @@
 
 Describe "Module source file encoding (Windows PowerShell 5.1 import safety)" {
     BeforeDiscovery {
-        $moduleRoot = Join-Path $PSScriptRoot '..' '..' 'module'
+        $moduleRoot = Join-Path (Join-Path (Join-Path $PSScriptRoot '..') '..') 'module'
         $script:SourceFileCases = @()
         if (Test-Path -Path $moduleRoot) {
             $script:SourceFileCases = Get-ChildItem -Path $moduleRoot -Recurse -Filter '*.ps1' -File |
@@ -28,11 +28,11 @@ Describe "Module source file encoding (Windows PowerShell 5.1 import safety)" {
     }
 
     It "Should resolve the module source directory" {
-        (Join-Path $PSScriptRoot '..' '..' 'module') | Should -Exist
+        (Join-Path (Join-Path (Join-Path $PSScriptRoot '..') '..') 'module') | Should -Exist
     }
 
     It "Should discover module source files to validate" {
-        $moduleRoot = Join-Path $PSScriptRoot '..' '..' 'module'
+        $moduleRoot = Join-Path (Join-Path (Join-Path $PSScriptRoot '..') '..') 'module'
         @(Get-ChildItem -Path $moduleRoot -Recurse -Filter '*.ps1' -File).Count | Should -BeGreaterThan 0
     }
 
